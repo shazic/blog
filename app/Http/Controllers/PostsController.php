@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Post;
 use App\Category;
+use App\Tag;
 use App\Http\Controllers\AlertsController as Alert;
 
 class PostsController extends Controller
@@ -31,6 +32,7 @@ class PostsController extends Controller
     {
         // Get all categories
         $categories = Category::all();
+        $tags       = Tag::all();
 
         // Check if categories exist
         if ( $categories->count() == 0 )    {
@@ -41,7 +43,8 @@ class PostsController extends Controller
             return redirect()->back();
         }
 
-        return view('admin.posts.create')->with('categories', $categories);
+        return view('admin.posts.create')->with('categories', $categories)
+                                         ->with('tags', $tags );
     }
 
     /**
@@ -57,7 +60,8 @@ class PostsController extends Controller
             'title'         => 'required|max:200',  // must be less than 200 chars
             'featured'      => 'image',             // uploaded file must be an image file
             'category_id'   => 'required',
-            'content'       => 'required'
+            'content'       => 'required',
+            'tags'          => 'required'
         ]);
         
         $featured = $request->featured;
@@ -77,6 +81,8 @@ class PostsController extends Controller
             'category_id'   => $request->category_id
         ]);
         
+        //Save the tags in the pivot table post_tag using the relationship.
+        $post->tags()->attach($request->tags);
 
         // display success/failure message
         Alert::flashMessage($post, 'Post successfully created');
@@ -106,10 +112,12 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         $categories = Category::all();
+        $tags = Tag::all();
         //$back = redirect()->back();
 
         return view('admin.posts.edit')->with('post', $post)
                                        ->with('categories', $categories)
+                                       ->with('tags', $tags)
         //                               ->with('goback', $back->targetUrl) // $targetUrl is protected, cannot access directly
         ;
     }
@@ -127,7 +135,8 @@ class PostsController extends Controller
         $this->validate( $request, [
             'title'         => 'required|max:200',  // must be less than 200 chars
             'category_id'   => 'required',
-            'content'       => 'required'
+            'content'       => 'required',
+            'tags'          => 'required'
         ]);
         
         $post = Post::find($id);
@@ -149,6 +158,9 @@ class PostsController extends Controller
         $post->content      = $request->content;
         
         $result = $post->save();
+
+        // sync the tags associated with the post through the relationship pivot table post_tag
+        $post->tags()->sync($request->tags);
 
         Alert::flashMessage($result, 'Post update successfully');
 

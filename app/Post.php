@@ -47,11 +47,11 @@ class Post extends Model
     }
 
     /**
-     * Defines relationship with the tags table. A Post 'belongs to' only  one tags.
+     * Defines relationship with the tags table. A Post 'belongs to many' tags.
      * 
      * @return object a belongsTo relationship object
      */
     public function tags()  {
-        return $this->belongsTo('App\Tag');
+        return $this->belongsToMany('App\Tag');
     }
 }

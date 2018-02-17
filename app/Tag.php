@@ -17,7 +17,7 @@ class Tag extends Model
     ];
 
     /**
-     * Defines relationship with the posts table. A tag 'has many' posts.
+     * Defines relationship with the posts table. A tag 'belongs to many' posts.
      * 
      * @return object a hasMany relationship object
      */
