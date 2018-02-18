@@ -9,6 +9,19 @@ use App\Http\Controllers\AlertsController as Alert;
 
 class UsersController extends Controller
 {
+
+    /**
+     * Constructor function for class.
+     * 
+     * @return void
+     */
+    public function __construct()   {
+        
+        // This class should only offer functionality to the admin users.
+
+        $this->middleware('admin');
+    }
+
     /**
      * Display a listing of the resource.
      *

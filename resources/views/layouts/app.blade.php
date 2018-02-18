@@ -95,11 +95,13 @@
                                 Dashboard
                                 </li>
                             </a>
-                            <a href="{{ route('users') }}" class="sidebar-menu">
-                                <li class="list-group-item">
-                                Users
-                                </li>
-                            </a>
+                            @if( Auth::user()->admin )
+                                <a href="{{ route('users') }}" class="sidebar-menu">
+                                    <li class="list-group-item">
+                                    Users
+                                    </li>
+                                </a>
+                            @endif
                             <a href="{{ route('posts') }}" class="sidebar-menu">
                                 <li class="list-group-item">
                                 Posts
@@ -120,11 +122,13 @@
                                         Tags
                                     </li>
                             </a>
-                            <a href="{{ route('user.create') }}" class="sidebar-menu">
-                                <li class="list-group-item">
-                                    Create a new user
-                                </li>
-                            </a>
+                            @if( Auth::user()->admin )
+                                <a href="{{ route('user.create') }}" class="sidebar-menu">
+                                    <li class="list-group-item">
+                                        Create a new user
+                                    </li>
+                                </a>
+                            @endif
                             <a href="{{ route('post.create') }}" class="sidebar-menu">
                                 <li class="list-group-item">
                                     Create a new post
