@@ -30,7 +30,7 @@ class Post extends Model
     /**
      * Defines an accessor for the column 'featured' on the Posts table
      * 
-     * @return object a belongsTo relationship object
+     * @return object an asset
      */
     public function getFeaturedAttribute($featured)  {
         return asset($featured);
@@ -49,7 +49,7 @@ class Post extends Model
     /**
      * Defines relationship with the tags table. A Post 'belongs to many' tags.
      * 
-     * @return object a belongsTo relationship object
+     * @return object a belongsToMany relationship object
      */
     public function tags()  {
         return $this->belongsToMany('App\Tag');

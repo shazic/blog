@@ -32,6 +32,22 @@ Route::group( [
         // Route to the user's home page
         Route::get('/home', 'HomeController@index')->name('home');
 
+        // Route to the users index page (list of all users)
+        Route::get('/users', 'UsersController@index')->name('users');
+        // All routes for the UsersController
+        Route::prefix('user')->group( function()  {
+            // Route to the create user 
+            Route::get('create', 'UsersController@create')->name('user.create');
+            // Route to the promote a user as the admin
+            Route::get('admin{id}', 'UsersController@admin')->name('user.admin');
+            // Route to the demote a user from admin to regular user
+            Route::get('demote{id}', 'UsersController@demote')->name('user.demote');
+            // Route to the store a new user 
+            Route::post('store', 'UsersController@store')->name('user.store');
+            // Route to the delete user 
+            Route::get('delete{id}', 'UsersController@destroy')->name('user.delete');
+        });
+
         // Route to display an index of all posts
         Route::get('posts', 'PostsController@index')->name('posts');
         //Route to view trashed posts

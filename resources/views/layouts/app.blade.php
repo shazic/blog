@@ -95,6 +95,11 @@
                                 Dashboard
                                 </li>
                             </a>
+                            <a href="{{ route('users') }}" class="sidebar-menu">
+                                <li class="list-group-item">
+                                Users
+                                </li>
+                            </a>
                             <a href="{{ route('posts') }}" class="sidebar-menu">
                                 <li class="list-group-item">
                                 Posts
@@ -114,6 +119,11 @@
                                     <li class="list-group-item">
                                         Tags
                                     </li>
+                            </a>
+                            <a href="{{ route('user.create') }}" class="sidebar-menu">
+                                <li class="list-group-item">
+                                    Create a new user
+                                </li>
                             </a>
                             <a href="{{ route('post.create') }}" class="sidebar-menu">
                                 <li class="list-group-item">
