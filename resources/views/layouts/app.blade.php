@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
-    
+    @yield('customstyles')
 </head>
 <body>
     <style>
@@ -151,11 +151,18 @@
                                 </li>
                             </a>
                             <a href="{{ route('tag.create') }}" class="sidebar-submenu">
-                                    <li class="list-group-item">
-                                        Create a new Tag
+                                <li class="list-group-item">
+                                    Create a new Tag
+                                </li>
+                            </a>
+                            @if( Auth::user()->admin )
+                                <a href="{{ route('settings') }}" class="sidebar-menu">
+                                    <li class="list-group-item" >
+                                    Settings
                                     </li>
                                 </a>
-                            </ul>
+                            @endif
+                        </ul>
                     </div>
                     <div class="col-md-9">
                         @include('includes.alerts')
@@ -171,5 +178,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/toastr.min.js') }}"></script>
+    @yield('customjs')
 </body>
 </html>

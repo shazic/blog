@@ -35,12 +35,18 @@ class PostsController extends Controller
         $tags       = Tag::all();
 
         // Check if categories exist
-        if ( $categories->count() == 0 )    {
+        if ( $categories->count() == 0 || $tags->count() == 0 )    {
             Alert::flashMessage(false,
                                 null,
-                                'You need to add a category before creating a post', 
+                                'You need to add at least one category and one tag before creating a post', 
                                 'info');
-            return redirect()->back();
+
+            // Redirect to appropriate view for creating a new category or a tag                                
+            if ( $categories->count() == 0 )                                
+                return view('admin.categories.create'); // Let's create a category
+            else if( $tags->count() == 0 )
+                return view('admin.tags.create');       // Let's create a tag
+
         }
 
         return view('admin.posts.create')->with('categories', $categories)

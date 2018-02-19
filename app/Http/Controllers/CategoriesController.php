@@ -116,6 +116,12 @@ class CategoriesController extends Controller
     {
         $category = Category::find($id);
 
+        // Delete all posts associated with the category, or else they would be left hanging in the database.
+        
+        foreach( $category->posts as $post) {
+            $post->forceDelete(); // Since delete() will only soft delete the post.
+        }
+
         $result=$category->delete();
         
         // display success/failure message

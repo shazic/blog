@@ -114,6 +114,16 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+        $user = User::find($id);
+
+        $result = $user->profile->delete();
+
+        if ($result)    {
+            $result = $user->delete();
+        }
+
+        Alert::flashMessage($result, "User deleted successfully");
+
         return redirect()->back();
     }
 

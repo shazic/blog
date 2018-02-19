@@ -1,5 +1,22 @@
 @extends('layouts.app')
 
+@section('customstyles')
+    <!-- include summernote css -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+@endsection
+
+@section('customjs')
+    <!-- include summernote js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+    <script>
+            $('#content').summernote({
+                placeholder: 'Create a blog post',
+                tabsize: 2,
+                height: 200
+            });
+    </script>
+@endsection
+
 @section('content')
     
     @include('includes.errors')
@@ -43,6 +60,7 @@
                 <div class="form-group">
                         <label for="content">Content</label>
                         <textarea name="content" id="content" class="form-control" cols="5" rows="10"></textarea>
+                        <!--div id="content" name="content"></div-->
                 </div>
 
                 <div class="form-group">

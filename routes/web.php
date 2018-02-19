@@ -109,4 +109,12 @@ Route::group( [
             // Route to update a user's profile
             Route::post('update', 'ProfilesController@update')->name('profile.update');
         }); 
+
+        // Route to the blog's settings page
+        Route::get('settings', 'SettingsController@index')->name('settings');
+        // All routes for the SettingsController
+        Route::prefix('settings')->group( function()  {
+            // Route to update a user's profile
+            Route::post('update', 'SettingsController@update')->name('settings.update');
+        });
 });
