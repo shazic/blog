@@ -17,8 +17,14 @@
 </head>
 <body>
     <style>
-        a.sidebar-menu {
+        a.sidebar-menu, a.sidebar-submenu {
             text-decoration: none;
+        }
+        a.sidebar-submenu li   {
+            background-color: #efe;
+        }
+        a.sidebar-submenu li:hover   {
+            background-color: #ded;
         }
         a.sidebar-menu li {
             /*border: 1px #abc solid;*/
@@ -95,6 +101,11 @@
                                 Dashboard
                                 </li>
                             </a>
+                            <a href="{{ route('profile') }}" class="sidebar-menu">
+                                <li class="list-group-item" >
+                                My Profile
+                                </li>
+                            </a>
                             @if( Auth::user()->admin )
                                 <a href="{{ route('users') }}" class="sidebar-menu">
                                     <li class="list-group-item">
@@ -123,23 +134,23 @@
                                     </li>
                             </a>
                             @if( Auth::user()->admin )
-                                <a href="{{ route('user.create') }}" class="sidebar-menu">
+                                <a href="{{ route('user.create') }}" class="sidebar-submenu">
                                     <li class="list-group-item">
                                         Create a new user
                                     </li>
                                 </a>
                             @endif
-                            <a href="{{ route('post.create') }}" class="sidebar-menu">
+                            <a href="{{ route('post.create') }}" class="sidebar-submenu">
                                 <li class="list-group-item">
                                     Create a new post
                                 </li>
                             </a>
-                            <a href="{{ route('category.create') }}" class="sidebar-menu">
+                            <a href="{{ route('category.create') }}" class="sidebar-submenu">
                                 <li class="list-group-item">
                                     Create a new category
                                 </li>
                             </a>
-                            <a href="{{ route('tag.create') }}" class="sidebar-menu">
+                            <a href="{{ route('tag.create') }}" class="sidebar-submenu">
                                     <li class="list-group-item">
                                         Create a new Tag
                                     </li>
